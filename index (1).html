@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David Oluwasusi — Software Engineer, Web & Bioinformatics</title>
+<meta name="description" content="David Oluwasusi builds web tools for exploring biological data at EMBL-EBI / Open Targets, after five years shipping production web and mobile apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131A18;
+    --ink-soft:#4A5652;
+    --paper:#E9EDE9;
+    --panel:#FFFFFF;
+    --rule:#C7CFC9;
+    --rule-faint:#DCE2DD;
+    --accent:#16624C;
+    --accent-soft:#D7E6DF;
+    --amber:#B0790B;
+    --amber-soft:#F0E4C8;
+    --display:'Bricolage Grotesque','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --body:'Newsreader',Georgia,'Times New Roman',serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --gut:clamp(20px,5vw,72px);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  ::selection{background:var(--accent);color:#fff}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+
+  .label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(233,237,233,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--rule);
+  }
+  .topbar-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;height:54px;
+  }
+  .brand{
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;text-decoration:none;white-space:nowrap;
+  }
+  .brand b{font-weight:500}
+  .brand span{color:var(--ink-soft)}
+  .navlinks{display:flex;gap:22px}
+  .navlinks a{
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+    text-decoration:none;color:var(--ink-soft);padding:4px 0;
+    border-bottom:1px solid transparent;
+  }
+  .navlinks a:hover,.navlinks a:focus-visible{color:var(--ink);border-bottom-color:var(--accent)}
+  @media(max-width:720px){.navlinks{display:none}}
+
+  /* ---------- ruler divider ---------- */
+  .ruler{
+    height:22px;position:relative;
+    border-top:1px solid var(--rule);
+    background:
+      repeating-linear-gradient(to right,var(--rule) 0 1px,transparent 1px 24px);
+    background-size:100% 6px;
+    background-repeat:no-repeat;
+    background-position:0 0;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:clamp(56px,10vw,110px);padding-bottom:clamp(40px,7vw,72px)}
+  .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(38px,7.4vw,86px);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0 0 28px;
+    max-width:15ch;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{
+    font-size:clamp(19px,2.1vw,23px);
+    font-weight:300;
+    line-height:1.55;
+    max-width:56ch;
+    color:#222C29;
+    margin:0 0 34px;
+  }
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+    border:1px solid var(--rule);border-radius:999px;
+    padding:6px 13px;color:var(--ink-soft);background:var(--panel);
+  }
+  .chip a{text-decoration:none}
+  .chip a:hover{color:var(--accent)}
+
+  /* ---------- section frame ---------- */
+  section{padding:clamp(52px,8vw,96px) 0}
+  .sec-head{
+    display:flex;align-items:baseline;gap:16px;
+    padding-bottom:14px;margin-bottom:36px;
+    border-bottom:1px solid var(--rule);
+  }
+  .sec-head h2{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;
+    margin:0;
+  }
+  .sec-head .label{margin-left:auto;text-align:right}
+
+  /* ---------- alignment track ---------- */
+  .browser{
+    background:var(--panel);
+    border:1px solid var(--rule);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .axis{
+    position:relative;height:34px;
+    border-bottom:1px solid var(--rule-faint);
+    background:#FBFCFB;
+  }
+  .tick{position:absolute;top:0;bottom:0;border-left:1px solid var(--rule-faint)}
+  .tick span{
+    position:absolute;top:10px;left:6px;
+    font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+  }
+  .trackgroup{padding:18px 0 6px}
+  .track-title{
+    display:flex;align-items:center;gap:8px;
+    padding:0 16px 10px;
+  }
+  .track-title .sq{width:9px;height:9px;flex:none;border-radius:1px}
+  .lane{
+    position:relative;height:42px;margin:0 16px 8px;
+  }
+  .lane::before{
+    content:"";position:absolute;left:0;right:0;top:50%;
+    border-top:1px dashed var(--rule-faint);
+  }
+  .feature{
+    position:absolute;top:6px;height:30px;
+    display:flex;align-items:center;
+    padding:0 12px;
+    border:1px solid transparent;
+    border-radius:2px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.02em;
+    color:#fff;background:var(--accent);
+    cursor:pointer;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;
+    transform-origin:left center;
+    transition:filter .18s ease,box-shadow .18s ease;
+  }
+  .feature.edu{background:var(--amber)}
+  .feature:hover{filter:brightness(1.12)}
+  .feature[aria-pressed="true"]{box-shadow:0 0 0 3px var(--accent-soft)}
+  .feature.edu[aria-pressed="true"]{box-shadow:0 0 0 3px var(--amber-soft)}
+  .feature:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .offscreen-note{
+    padding:4px 16px 16px;font-family:var(--mono);
+    font-size:11px;color:var(--ink-soft);
+  }
+
+  .detail{
+    border-top:1px solid var(--rule);
+    background:#FBFCFB;
+    padding:26px 16px 28px;
+  }
+  .detail h3{
+    font-family:var(--display);font-weight:500;font-size:23px;
+    letter-spacing:-.01em;margin:6px 0 4px;
+  }
+  .detail .where{font-size:16.5px;color:var(--ink-soft);margin:0 0 16px}
+  .detail ul{margin:0;padding-left:1.1em;max-width:70ch}
+  .detail li{margin-bottom:7px;font-size:16.5px;line-height:1.5}
+  .detail li::marker{color:var(--accent)}
+
+  /* ---------- work ---------- */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .card{
+    background:var(--panel);border:1px solid var(--rule);border-radius:3px;
+    padding:26px 24px 22px;display:flex;flex-direction:column;
+    transition:border-color .18s ease,transform .18s ease;
+  }
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card h3{
+    font-family:var(--display);font-weight:500;font-size:22px;
+    letter-spacing:-.015em;margin:10px 0 10px;
+  }
+  .card p{margin:0 0 18px;font-size:16.5px;color:#28312E;flex:1}
+  .stats{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 18px}
+  .stat b{
+    display:block;font-family:var(--display);font-weight:700;
+    font-size:21px;letter-spacing:-.02em;line-height:1.1;
+  }
+  .stat span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .tools{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .tool{
+    font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    border:1px solid var(--rule-faint);border-radius:2px;padding:3px 8px;
+  }
+  .cardlink{
+    font-family:var(--mono);font-size:12px;text-decoration:none;
+    color:var(--accent);border-bottom:1px solid var(--accent-soft);
+    align-self:flex-start;padding-bottom:2px;
+  }
+  .cardlink:hover{border-bottom-color:var(--accent)}
+
+  /* ---------- stack + education ---------- */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px)}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+  .stack-row{
+    display:grid;grid-template-columns:130px 1fr;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--rule-faint);
+  }
+  .stack-row:last-child{border-bottom:0}
+  .stack-row p{margin:0;font-size:16.5px;line-height:1.5}
+  @media(max-width:520px){.stack-row{grid-template-columns:1fr;gap:4px}}
+  .edu-item{padding:14px 0;border-bottom:1px solid var(--rule-faint)}
+  .edu-item:last-child{border-bottom:0}
+  .edu-item h3{font-family:var(--display);font-weight:500;font-size:19px;margin:6px 0 2px}
+  .edu-item p{margin:0;font-size:16.5px;color:var(--ink-soft)}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--ink);color:#E6ECE8;
+    padding:clamp(56px,9vw,96px) 0 40px;
+  }
+  footer .label{color:#8A9A93}
+  footer h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(30px,5.4vw,58px);letter-spacing:-.03em;
+    line-height:1.02;margin:18px 0 26px;max-width:16ch;
+  }
+  .contacts{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px}
+  .contacts a{
+    font-family:var(--mono);font-size:13px;text-decoration:none;
+    border:1px solid #33403B;border-radius:999px;padding:9px 16px;
+    transition:background .18s ease,border-color .18s ease;
+  }
+  .contacts a:hover{background:#1D2724;border-color:#4C5B55}
+  .colophon{
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    border-top:1px solid #2A3532;padding-top:18px;
+  }
+  .colophon p{margin:0;font-family:var(--mono);font-size:11px;color:#8A9A93}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top"><b>David Oluwasusi</b> <span>/ software engineer</span></a>
+    <nav class="navlinks">
+      <a href="#track">Experience</a>
+      <a href="#work">Selected work</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="wrap hero">
+    <div class="eyebrow"><span class="dot"></span><span class="label">Currently — EMBL / Open Targets</span></div>
+    <h1>I build interfaces for data that <em>doesn't fit on a screen</em>.</h1>
+    <p class="lede">Five years of production web and mobile engineering, now pointed at genomics. At Open Targets I work on the tools researchers use to explore biological data — the same craft that took a React&nbsp;Native storefront to 100,000 installs, applied to genome browsers and evidence at scale.</p>
+    <div class="hero-meta">
+      <span class="chip">React · React Native · TypeScript</span>
+      <span class="chip">GraphQL · Node.js</span>
+      <span class="chip">JBrowse2 · NGS · Python</span>
+      <span class="chip"><a href="https://github.com/daviddamilola">github.com/daviddamilola</a></span>
+    </div>
+  </div>
+
+  <div class="ruler" aria-hidden="true"></div>
+
+  <section id="track">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Experience</h2>
+        <span class="label">Select a feature for detail</span>
+      </div>
+
+      <div class="browser">
+        <div class="axis" id="axis"></div>
+
+        <div class="trackgroup">
+          <div class="track-title">
+            <span class="sq" style="background:var(--accent)"></span>
+            <span class="label">Employment</span>
+          </div>
+          <div id="jobs"></div>
+
+          <div class="track-title" style="padding-top:12px">
+            <span class="sq" style="background:var(--amber)"></span>
+            <span class="label">Study</span>
+          </div>
+          <div id="edu"></div>
+          <p class="offscreen-note">BSc Pharmacology, 2014–2017 — outside this view.</p>
+        </div>
+
+        <div class="detail" id="detail" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Selected work</h2>
+        <span class="label">Four projects</span>
+      </div>
+
+      <div class="cards">
+
+        <article class="card">
+          <span class="label">Commercial · iOS &amp; Android</span>
+          <h3>Carhartt WIP mobile app</h3>
+          <p>Frontend architecture and release engineering for a global streetwear storefront, built in React Native with a cross-functional team of engineers, designers and agencies. Custom native bridges for Apple Pay and Emarsys; Fastlane and GitHub Actions driving every TestFlight build.</p>
+          <div class="stats">
+            <span class="stat"><b>100k+</b><span>installs, year one</span></span>
+            <span class="stat"><b>$1M+</b><span>first-year revenue</span></span>
+            <span class="stat"><b>−80%</b><span>CI cost</span></span>
+            <span class="stat"><b>98%</b><span>App Store acceptance</span></span>
+          </div>
+          <div class="tools"><span class="tool">React Native</span><span class="tool">TypeScript</span><span class="tool">Swift</span><span class="tool">Fastlane</span><span class="tool">GitHub Actions</span></div>
+        </article>
+
+        <article class="card">
+          <span class="label">Bioinformatics · MSc thesis</span>
+          <h3>Tersect Browser</h3>
+          <p>A browser-based tool for comparing resequenced genomes, built on JBrowse2. Loads intersection analyses across accessions and renders them as navigable tracks, so a comparison that used to mean command-line work becomes a URL you can share.</p>
+          <div class="tools"><span class="tool">JBrowse2</span><span class="tool">React</span><span class="tool">Angular 19</span><span class="tool">Node.js</span><span class="tool">Docker</span></div>
+          <a class="cardlink" href="https://github.com/Tersect-Browser/Tersect-browser">Tersect-Browser/Tersect-browser →</a>
+        </article>
+
+        <article class="card">
+          <span class="label">Bioinformatics · Desktop</span>
+          <h3>Genome Viewer</h3>
+          <p>A Java desktop application for loading genome assembly data and inspecting it interactively — contigs, coverage and features in a single Swing interface, written to make assembly QC legible without a web stack.</p>
+          <div class="tools"><span class="tool">Java</span><span class="tool">Swing</span></div>
+          <a class="cardlink" href="https://github.com/daviddamilola/GenomicViewer">daviddamilola/GenomicViewer →</a>
+        </article>
+
+        <article class="card">
+          <span class="label">Bioinformatics · CLI</span>
+          <h3>FastQC Analyser</h3>
+          <p>A command-line tool that parses raw FastQC output and turns it into publication-ready quality-control charts, so per-run read quality can go straight into a report instead of a screenshot folder.</p>
+          <div class="tools"><span class="tool">Python</span><span class="tool">Matplotlib</span><span class="tool">Seaborn</span></div>
+          <a class="cardlink" href="https://github.com/daviddamilola/FastQC_reporter">daviddamilola/FastQC_reporter →</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Stack &amp; study</h2>
+        <span class="label">What I reach for</span>
+      </div>
+
+      <div class="two">
+        <div>
+          <div class="stack-row"><span class="label">Languages</span><p>TypeScript, JavaScript (ES6+), Python, R, Java, Swift, Objective-C, Ruby, SQL</p></div>
+          <div class="stack-row"><span class="label">Frontend</span><p>React, React Native, Next.js, Angular 19, Tailwind CSS, SCSS, React Query</p></div>
+          <div class="stack-row"><span class="label">Backend</span><p>Node.js, GraphQL, GraphQL Mesh, REST, Sanity CMS, Contentful</p></div>
+          <div class="stack-row"><span class="label">Bioinformatics</span><p>JBrowse2, FastQC, NGS analysis, genome visualisation, Matplotlib, Seaborn, Docker</p></div>
+          <div class="stack-row"><span class="label">Delivery</span><p>Fastlane, GitHub Actions, TestFlight, App Store Connect, Jest, React Testing Library</p></div>
+        </div>
+
+        <div>
+          <div class="edu-item">
+            <span class="label">Cranfield University, UK · 2024–2025</span>
+            <h3>MSc Bioinformatics</h3>
+            <p>Exploratory data analysis, machine learning, advanced NGS, data integration networks, databases.</p>
+          </div>
+          <div class="edu-item">
+            <span class="label">Olabisi Onabanjo University, Nigeria · 2014–2017</span>
+            <h3>BSc Pharmacology</h3>
+            <p>Where the interest in what drugs actually do to targets started.</p>
+          </div>
+          <div class="edu-item">
+            <span class="label">Google Africa Developer Scholarship · 2019, 2021</span>
+            <h3>Web development mentor</h3>
+            <p>Guided learners through frontend fundamentals and modern JavaScript.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="label">Open to conversations</span>
+    <h2>Tell me what you're trying to see.</h2>
+    <div class="contacts">
+      <a href="mailto:daviddamilola20@gmail.com">daviddamilola20@gmail.com</a>
+      <a href="https://www.linkedin.com/in/daviddamilola/">LinkedIn</a>
+      <a href="https://github.com/daviddamilola">GitHub</a>
+      <a href="tel:+447466543401">+44 7466 543401</a>
+    </div>
+    <div class="colophon">
+      <p>David Oluwasusi — Cranfield, United Kingdom</p>
+      <p>Laid out like a genome browser, because that's the day job.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var START = 2020 + 7/12;   // Aug 2020
+  var END   = 2026 + 7/12;   // Aug 2026
+  var span  = END - START;
+  var m = function(y,mo){ return y + (mo-1)/12; };
+  var pct = function(v){ return ((v - START)/span)*100; };
+
+  var jobs = [
+    { label:"Workforce Group", start:m(2020,8), end:m(2022,2), lane:0,
+      role:"Full-Stack Engineer", where:"Workforce Group — Lagos, Nigeria · Aug 2020 – Feb 2022",
+      bullets:[
+        "Delivered full-stack features for Learnry, an edtech platform, across the whole product lifecycle from design through deployment.",
+        "Built and maintained core product features in React and Node.js.",
+        "Worked with product and design to ship user-facing features on schedule."
+      ]},
+    { label:"Prepend GmbH", start:m(2022,1), end:m(2024,9), lane:1,
+      role:"Full-Stack Engineer", where:"Prepend GmbH — Berlin, Germany (remote) · Jan 2022 – Sep 2024",
+      bullets:[
+        "Contributed to the Carhartt WIP GSM mobile app in React Native, focused on e-commerce UX and performance.",
+        "Rebuilt Strenger Group's content platform (strenger.de) with Next.js, React, TypeScript, GraphQL, Contentful and Tailwind, alongside agencies Meta Design and EXconcept.",
+        "Integrated GraphQL Mesh to unify several data sources into one consistent API surface.",
+        "Wrote component tests with React Testing Library to keep regressions out of releases."
+      ]},
+    { label:"Triebkraft GmbH", start:m(2024,9), end:m(2025,9), lane:2,
+      role:"Frontend Engineer & Mobile DevOps Engineer", where:"Triebkraft GmbH — Berlin, Germany (remote) · Sep 2024 – Sep 2025",
+      bullets:[
+        "Architected and implemented the Carhartt WIP iOS and Android frontend in React Native and TypeScript.",
+        "Built custom native integrations for Apple Pay and Emarsys, contributing to over $1M in app revenue in year one.",
+        "Designed CI/CD pipelines with Fastlane and GitHub Actions for TestFlight builds and release management.",
+        "Cut GitHub Actions costs by 80% by optimising the iOS deployment pipeline.",
+        "Coordinated across multiple agencies to land the MVP on time and on budget."
+      ]},
+    { label:"Carhartt WIP", start:m(2025,10), end:m(2025,12), lane:2,
+      role:"Frontend Engineer & Mobile DevOps Engineer", where:"Carhartt WIP — Berlin, Germany (remote) · Oct 2025 – Nov 2025",
+      bullets:[
+        "Continued frontend and release ownership of the Carhartt WIP app in-house after the agency engagement.",
+        "Held a 98% App Store acceptance rate across iOS releases, with full compliance to Apple guidelines.",
+        "App passed 100,000 installs in its first year."
+      ]},
+    { label:"EMBL-EBI / Open Targets", start:m(2025,12), end:m(2026,8), lane:3, current:true,
+      role:"Software Engineer", where:"EMBL / Open Targets — Remote, UK · Dec 2025 – present",
+      bullets:[
+        "Building and maintaining web tools for exploring and visualising biological data on the Open Targets Platform.",
+        "Open Targets is a public–private partnership for systematic drug target identification and prioritisation.",
+        "Working across the interface, the data layer and the visualisations researchers use daily."
+      ]}
+  ];
+
+  var edu = [
+    { label:"MSc Bioinformatics, Cranfield", start:m(2024,9), end:m(2025,11), lane:0, edu:true,
+      role:"MSc Bioinformatics", where:"Cranfield University, UK · Sep 2024 – Oct 2025",
+      bullets:[
+        "Modules: exploratory data analysis, machine learning, advanced NGS, data integration networks, databases (SQL).",
+        "Languages and tooling across Python, R, Java, JavaScript and Angular 19.",
+        "Thesis work became Tersect Browser, a JBrowse2-based genome comparison tool.",
+        "Overlapped with full-time engineering at Triebkraft — see the employment track above."
+      ]}
+  ];
+
+  /* axis ticks — one per calendar year in view */
+  var axis = document.getElementById('axis');
+  for(var y=2021; y<=2026; y++){
+    var t = document.createElement('div');
+    t.className = 'tick';
+    t.style.left = pct(y) + '%';
+    t.innerHTML = '<span>' + y + '</span>';
+    axis.appendChild(t);
+  }
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var all = [];
+
+  function build(items, host){
+    var lanes = {};
+    items.forEach(function(d){ lanes[d.lane] = true; });
+    Object.keys(lanes).sort().forEach(function(k){
+      var lane = document.createElement('div');
+      lane.className = 'lane';
+      lane.dataset.lane = k;
+      host.appendChild(lane);
+    });
+    items.forEach(function(d, i){
+      var lane = host.querySelector('.lane[data-lane="' + d.lane + '"]');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'feature' + (d.edu ? ' edu' : '');
+      b.style.left = pct(d.start) + '%';
+      b.style.width = (pct(d.end) - pct(d.start)) + '%';
+      b.textContent = d.label;
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', function(){ select(d, b); });
+      if(!reduce){
+        b.style.transform = 'scaleX(0)';
+        b.style.opacity = '0';
+        setTimeout(function(){
+          b.style.transition = 'transform .55s cubic-bezier(.2,.7,.3,1), opacity .4s ease, filter .18s ease, box-shadow .18s ease';
+          b.style.transform = 'scaleX(1)';
+          b.style.opacity = '1';
+        }, 120 + i*90);
+      }
+      lane.appendChild(b);
+      all.push({data:d, el:b});
+    });
+  }
+
+  build(jobs, document.getElementById('jobs'));
+  build(edu, document.getElementById('edu'));
+
+  var detail = document.getElementById('detail');
+  function select(d, el){
+    all.forEach(function(f){ f.el.setAttribute('aria-pressed', f.el === el ? 'true' : 'false'); });
+    var html = '<span class="label">' + (d.edu ? 'Study' : (d.current ? 'Current role' : 'Employment')) + '</span>' +
+               '<h3>' + d.role + '</h3>' +
+               '<p class="where">' + d.where + '</p><ul>';
+    d.bullets.forEach(function(x){ html += '<li>' + x + '</li>'; });
+    detail.innerHTML = html + '</ul>';
+  }
+
+  var current = all.filter(function(f){ return f.data.current; })[0] || all[0];
+  select(current.data, current.el);
+})();
+</script>
+
+</body>
+</html>
